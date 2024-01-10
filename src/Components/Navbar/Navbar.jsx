@@ -11,7 +11,7 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li className="text-xl  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6 ">
+        <li className="text-xl  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-75 hover:-skew-y-6 hover:origin-top-left hover:rotate-45 bg-[#3fa92b] rounded">
             <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -22,7 +22,7 @@ const Navbar = () => {
             </NavLink>
         </li>
 
-        <li className="text-xl hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6 ">
+        <li className="text-xl hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-75 hover:-skew-y-6 hover:origin-top-left hover:rotate-12 bg-[#3fa92b] ">
             <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
@@ -49,7 +49,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to='/'>
-                        <div className="flex justify-center items-center   hover:scale-125  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom">
+                        <div className="flex justify-center items-center   hover:scale-125  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-3">
                             <div className="inline-block"><Lottie animationData={clockAnimation} className="w-[100px] "></Lottie></div>
                             <h3 className="text-2xl ml-5 inline-block">Time Tracker</h3>
                         </div>
@@ -82,8 +82,8 @@ const Navbar = () => {
                     </div>
 
                     {
-                        user ? <Link onClick={handleLogOut} className="py-2 px-6 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#2a7b36] uppercase  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6">Logout</Link> :
-                            <Link to={'/login'} className="py-2 px-10 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#FBF6EE] uppercase  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-500 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6 ">login</Link>
+                        user ? <Link onClick={handleLogOut} className="py-2 px-6 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#2a7b36] uppercase  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:bg-red-500 hover:text-gray-100 hover:-skew-y-6 hover:origin-top-left hover:rotate-45">Logout</Link> :
+                            <Link to={'/login'} className="py-2 px-10 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#FBF6EE] uppercase  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-500 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-45 ">login</Link>
                     }
 
                 </div>
