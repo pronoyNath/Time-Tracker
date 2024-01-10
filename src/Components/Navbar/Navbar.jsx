@@ -1,17 +1,17 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import { AuthContext } from "../../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 import clockAnimation from "../../assets/clockAnimation.json"
 import Lottie from "lottie-react";
 
 const Navbar = () => {
-    // const { user, logOut } = useContext(AuthContext);
-    // const handleLogOut = () => {
-    //     logOut()
-    // }
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+    }
 
     const links = <>
-        <li className="text-xl">
+        <li className="text-xl  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
             <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -22,7 +22,7 @@ const Navbar = () => {
             </NavLink>
         </li>
 
-        <li className="text-xl">
+        <li className="text-xl hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
             <NavLink
                 to="/rooms"
                 className={({ isActive}) =>
@@ -38,6 +38,7 @@ const Navbar = () => {
         
             <div className="bg-[#3fa92b]">
                 <div className="navbar max-w-6xl mx-auto  text-gray-100 font-bold">
+                
                 <div className="navbar-start">
                     <div className="dropdown z-40">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -48,28 +49,31 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to='/'>
-                 <div className="flex justify-center items-center">
+                 <div className="flex justify-center items-center   hover:scale-125 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
                  <div className="inline-block"><Lottie animationData={clockAnimation} className="w-[100px] "></Lottie></div>
                    <h3 className="text-2xl ml-5 inline-block">Time Tracker</h3>
                  </div>
                     </Link>
                 </div>
-                <div className="navbar hidden lg:flex">
-                    <ul className="flex gap-5 px-1">
+               
+                <div className="navbar justify-center hidden lg:flex">
+                    <ul className="flex gap-5 px-1 ">
                         {links}
                     </ul>
                 </div>
-                {/* <div className="navbar-end">
+                
+                
+                <div className="navbar-end ">
                     <div className="mr-1 text-xs">
                         <p className="">{user?.displayName}</p>
                         <p className="hidden lg:block">{user?.email}</p>
                     </div>
                     <div>
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar mr-2">
-                            <div className="w-10 rounded-full">
+                            <div className="w-16 rounded-full">
                                 <img src={user ?
-                                    user?.photoURL ? user?.photoURL : "https://i.ibb.co/bghqWpR/user.png"
-                                    : "https://i.ibb.co/bghqWpR/user.png"
+                                    user?.photoURL ? user?.photoURL : "https://www.pixelwibes.com/template/timetracker/html/dist/assets/images/profile_av.svg"
+                                    : "https://www.pixelwibes.com/template/timetracker/html/dist/assets/images/profile_av.svg"
                                 } />
                                
                             </div>
@@ -78,11 +82,11 @@ const Navbar = () => {
                     </div>
 
                     {
-                        user ? <Link onClick={handleLogOut} className="px-10 text-xl py-2 md:py-2 md:px-6 text-[#2e2210] font-semibold rounded-md bg-[#dbb878]">Logout</Link> :
-                            <Link to={'/login'} className="py-2 px-10 text-xl text-[#2e2210]  rounded-md font-semibold bg-[#dbb878]">login</Link>
+                        user ? <Link onClick={handleLogOut} className="px-10 text-xl py-2 md:py-2 md:px-6 text-gray-100 font-semibold rounded-md bg-[#dbb878]">Logout</Link> :
+                            <Link to={'/login'} className="py-2 px-10 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#FBF6EE] uppercase  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">login</Link>
                     }
 
-                </div> */}
+                </div>
             </div>
             </div>
     );
