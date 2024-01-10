@@ -56,7 +56,7 @@ const Dashboard = () => {
                             }`}
                     /> */}
 
-                    <div className="flex justify-center items-center  hover:scale-105 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
+                    <div className="flex justify-center items-center  hover:scale-105 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-12 hover:rotate-6 ">
                         <div className={`inline-block ${!open && "hidden"}`}><Lottie animationData={clockAnimation} className="w-[100px] "></Lottie></div>
                         {
                             open &&

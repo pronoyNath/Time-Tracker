@@ -11,22 +11,22 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li className="text-xl  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
+        <li className="text-xl  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6 ">
             <NavLink
                 to="/"
                 className={({ isActive }) =>
-                     isActive ? "active px-2 py-1 rounded flex items-center border-b-4 border-gray-100  " : ""
+                    isActive ? "active px-2 py-1 rounded flex items-center border-b-4 border-gray-100  " : ""
                 }
             >
                 Home
             </NavLink>
         </li>
 
-        <li className="text-xl hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
+        <li className="text-xl hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6 ">
             <NavLink
                 to="/dashboard"
-                className={({ isActive}) =>
-                     isActive ? "active px-2 py-1 rounded flex items-center  border-b-4 border-gray-100  " : ""
+                className={({ isActive }) =>
+                    isActive ? "active px-2 py-1 rounded flex items-center  border-b-4 border-gray-100  " : ""
                 }
             >
                 Dashboard
@@ -35,10 +35,10 @@ const Navbar = () => {
     </>
 
     return (
-        
-            <div className="bg-[#3fa92b]">
-                <div className="navbar max-w-6xl mx-auto  text-gray-100 font-bold">
-                
+
+        <div className="bg-[#3fa92b]">
+            <div className="navbar max-w-6xl mx-auto  text-gray-100 font-bold">
+
                 <div className="navbar-start">
                     <div className="dropdown z-40">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -49,20 +49,20 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to='/'>
-                 <div className="flex justify-center items-center   hover:scale-125 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
-                 <div className="inline-block"><Lottie animationData={clockAnimation} className="w-[100px] "></Lottie></div>
-                   <h3 className="text-2xl ml-5 inline-block">Time Tracker</h3>
-                 </div>
+                        <div className="flex justify-center items-center   hover:scale-125  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom">
+                            <div className="inline-block"><Lottie animationData={clockAnimation} className="w-[100px] "></Lottie></div>
+                            <h3 className="text-2xl ml-5 inline-block">Time Tracker</h3>
+                        </div>
                     </Link>
                 </div>
-               
+
                 <div className="navbar justify-center w-auto hidden lg:flex">
                     <ul className="flex gap-5 px-1 ">
                         {links}
                     </ul>
                 </div>
-                
-                
+
+
                 <div className="navbar-end ">
                     <div className="mr-1 text-xs  ">
                         <p className="">{user?.displayName}</p>
@@ -75,20 +75,20 @@ const Navbar = () => {
                                     user?.photoURL ? user?.photoURL : "https://www.pixelwibes.com/template/timetracker/html/dist/assets/images/profile_av.svg"
                                     : "https://www.pixelwibes.com/template/timetracker/html/dist/assets/images/profile_av.svg"
                                 } />
-                               
+
                             </div>
                         </label>
 
                     </div>
 
                     {
-                        user ? <Link onClick={handleLogOut} className="py-2 px-6 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#2a7b36] uppercase  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6">Logout</Link> :
-                            <Link to={'/login'} className="py-2 px-10 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#FBF6EE] uppercase  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">login</Link>
+                        user ? <Link onClick={handleLogOut} className="py-2 px-6 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#2a7b36] uppercase  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6">Logout</Link> :
+                            <Link to={'/login'} className="py-2 px-10 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#FBF6EE] uppercase  hover:shadow-2xl hover:shadow-green-900 hover:scale-150  hover:ease-in-out duration-500 hover:delay-150 hover:-skew-y-6 hover:origin-bottom hover:rotate-6 ">login</Link>
                     }
 
                 </div>
             </div>
-            </div>
+        </div>
     );
 };
 
