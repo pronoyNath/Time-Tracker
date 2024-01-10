@@ -24,7 +24,7 @@ const Navbar = () => {
 
         <li className="text-xl hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">
             <NavLink
-                to="/rooms"
+                to="/dashboard"
                 className={({ isActive}) =>
                      isActive ? "active px-2 py-1 rounded flex items-center  border-b-4 border-gray-100  " : ""
                 }
@@ -56,7 +56,7 @@ const Navbar = () => {
                     </Link>
                 </div>
                
-                <div className="navbar justify-center hidden lg:flex">
+                <div className="navbar justify-center w-auto hidden lg:flex">
                     <ul className="flex gap-5 px-1 ">
                         {links}
                     </ul>
@@ -64,7 +64,7 @@ const Navbar = () => {
                 
                 
                 <div className="navbar-end ">
-                    <div className="mr-1 text-xs">
+                    <div className="mr-1 text-xs  ">
                         <p className="">{user?.displayName}</p>
                         <p className="hidden lg:block">{user?.email}</p>
                     </div>
@@ -82,7 +82,7 @@ const Navbar = () => {
                     </div>
 
                     {
-                        user ? <Link onClick={handleLogOut} className="px-10 text-xl py-2 md:py-2 md:px-6 text-gray-100 font-semibold rounded-md bg-[#dbb878]">Logout</Link> :
+                        user ? <Link onClick={handleLogOut} className="py-2 px-6 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#2a7b36] uppercase  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6">Logout</Link> :
                             <Link to={'/login'} className="py-2 px-10 text-xl text-[#3fa92b] rounded-md font-semibold bg-[#FBF6EE] uppercase  hover:shadow-2xl hover:shadow-green-200 hover:scale-150 hover:transition hover:ease-in-out duration-1000 hover:delay-150 hover:translate-l-9 hover:rotate-6 ">login</Link>
                     }
 
