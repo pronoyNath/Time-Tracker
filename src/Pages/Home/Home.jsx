@@ -4,7 +4,7 @@ import Footer from '../../Components/Footer/Footer';
 
 const Home = () => {
     return (
-        <div className='font-poppins'>
+        <div className='font-poppins overflow-hidden'>
             <Navbar></Navbar>
             <Banner></Banner>
             <Footer></Footer>
