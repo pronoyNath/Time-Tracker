@@ -3,7 +3,7 @@ import DisplayComponent from '../../Pages/Test/DisplayComponent';
 import BtnComponent from '../../Pages/Test/BtnComponent';
 import { FaArrowRotateLeft, FaRegTrashCan } from 'react-icons/fa6';
 
-const TaskCard = ({time,resume,reset, start,status,task}) => {
+const TaskCard = ({time,resume,reset,stop, start,status,task}) => {
     
     // console.log(Object.keys(task).join(','));
     const {_id,projectName,taskTitle,description,timer} = task;

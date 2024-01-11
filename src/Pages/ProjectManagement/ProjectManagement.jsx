@@ -49,9 +49,14 @@ const ProjectManagement = () => {
         return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
     };
 
-    const stop = () => {
-        clearInterval(interv);
-        setStatus(2);
+    const stop =async (id) => {
+        const findID = tasks.find(task=>task._id === id)
+        console.log(findID);
+        if(id === findID?._id){
+            clearInterval(interv);
+            setStatus(2);
+        }
+        
     };
 
     const reset = () => {
@@ -195,58 +200,25 @@ const ProjectManagement = () => {
 
                 {
                     tasks.map(task => <TaskCard
-                        key={task.id}
+                        key={task._id}
                         time={time}
                         resume={resume}
                         reset={reset}
                         start={start}
                         status={status}
+                        stop={() => stop(task._id)}
                         task={task}
                     ></TaskCard>)
                 }
 
             </div>
-            {/* projecs lists  */}
-            {/* <div className="flex flex-col  p-6 space-y-4 sm:p-10  text-black mt-10" >
-                <h2 className="text-xl font-semibold">My Projects</h2>
-                <ul className="flex flex-col divide-y divide-black">
-                    <li className="flex flex-col py-2 sm:flex-row sm:justify-between border border-black p-2">
-                        <div className="flex w-full space-x-2 sm:space-x-4" >
-                            <div className="flex flex-col justify-between w-full pb-4" >
-                                <div className="flex justify-between w-full pb-2 space-x-2" >
-                                    <div className="space-y-1" >
-                                        <h3 className="text-xl font-semibold leadi sm:pr-8 hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-45">Polaroid camera</h3>
-                                        <h3 className="text-lg leadi sm:pr-8">Polaroid camera</h3>
-                                        <p className="text-sm text-gray-900">Classic</p>
-                                    </div>
-                                    <div className="text-right flex gap-5 items-center" >
-                    
-                                        <DisplayComponent time={time} />
-                                        <BtnComponent status={status} resume={resume} reset={reset} stop={stop} start={start} />
-                                    </div>
-                                </div>
-                                <div className="flex text-sm divide-x" >
-                                    <div>
-                                        <button type="button" className="flex hover:text-red-500 items-center px-2 py-1 pl-0 space-x-1    hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-3 z-40 hover:shadow-2xl">
-                                            <FaRegTrashCan />
-                                            <span>Remove</span>
-                                        </button>
-                                    </div>
-                                    <button type="button" className="flex items-center px-2 py-1 space-x-1 hover:text-orange-500  hover:scale-150  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-3">
-                                        <FaArrowRotateLeft />
-                                        <span>Edit</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </div> */}
 
         </div>
     );
 };
 
 export default ProjectManagement;
+
+
+
+// ekhon changeessss 
