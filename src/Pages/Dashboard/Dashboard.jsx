@@ -18,6 +18,7 @@ const Dashboard = () => {
 
     // const axiosPublic = useAxiosPublic();
     const { user } = useContext(AuthContext);
+    console.log(user?.displayName);
     const [userInfo, setUserInfo] = useState([]);
 
     // useEffect(() => {
@@ -32,7 +33,7 @@ const Dashboard = () => {
 
     Menus = [
         { title: "Dashboard", src: "https://i.ibb.co/pZdfyDq/Chart-fill.png", link: '/dashboard' },
-        { title: "Tasks", src: "https://i.ibb.co/W6kRqk6/to-do-list.png", link: 'tasks' },
+        { title: "Project Management", src: "https://i.ibb.co/W6kRqk6/to-do-list.png", link: 'project-management' },
         { title: "User Profile", src: "https://i.ibb.co/4gS8Pbb/profile.png", gap: true, link: 'profile' },
     ];
 
@@ -97,20 +98,10 @@ const Dashboard = () => {
                 {
                     isDashboardActive &&
                     <div className="h-[700px] md:w-full">
-                        <div className="flex gap-10 justify-between items-center">
-                        <h3 className="text-base md:text-3xl text-center font-semibold uppercase">Welcome {userInfo?.name}</h3>  <Lottie animationData={deadPool} className="w-[200px] hover:scale-125  hover:ease-in-out duration-500 hover:delay-150  hover:origin-center hover:rotate-2 "></Lottie>
+                        <div className="flex gap-10 justify-between items-center max-w-5xl mx-auto">
+                        <h3 className="text-base md:text-3xl text-center font-semibold uppercase">Welcome <span className="text-green-600">{user?.displayName}</span></h3>  <Lottie animationData={deadPool} className="w-[200px] hover:scale-125  hover:ease-in-out duration-500 hover:delay-150  hover:origin-center hover:rotate-2 "></Lottie>
                         </div>
-                        {/* <p className="p-10 text-black ">
-                            <span className="font-semibold">  How to Use the Drag-and-Drop Feature:</span><br /><br />
-                            <span className="font-semibold underline"> To-Do:</span>   <br />
-                            Start with your tasks in the 'To-Do' section.<br />
-                            Simply click, hold, and drag a task card to initiate movement.<br /><br />
-                            <span className="font-semibold underline">  In Progress:</span>  <br />
-                            Drag the task card to the 'In Progress' section when you begin working on it.<br /><br />
-                            <span className="font-semibold underline"> Complete:</span>    <br />
-
-                            Once a task is finished, effortlessly move it to the 'Complete' section.<br />
-                        </p> */}
+                       
 
                         <section className="p-6 my-6 bg-green-600 text-gray-100">
                             <div className="container mx-auto " >
@@ -119,7 +110,7 @@ const Dashboard = () => {
                                     <Lottie animationData={timeAnimation} className="w-[100px] hover:scale-150  hover:ease-in-out duration-500 hover:delay-150  hover:origin-top-left hover:rotate-180 "></Lottie>
                                     </div>
                                     <div className="flex flex-col justify-center align-middle hover:scale-150  hover:ease-in-out duration-500 hover:delay-150 hover:skew-x-6 hover:origin-top-left hover:rotate-6" >
-                                        <p className="text-3xl font-semibold leadi"><span>300</span>H</p>
+                                        <p className="text-6xl font-semibold leadi"><span className="animate-pulse">300</span>H</p>
                                         <p className="capitalize">Total Working Hour</p>
                                     </div>
                                     <div>

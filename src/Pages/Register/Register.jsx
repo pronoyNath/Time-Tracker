@@ -37,7 +37,8 @@ const Register = () => {
         const currentUser = {
             name,
             email,
-            imageURL}
+            imageURL
+        }
         console.log(currentUser);
 
 

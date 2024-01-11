@@ -29,7 +29,7 @@ const Login = () => {
         //clear error
         setLoginError('')
 
-console.log(email,password);
+        console.log(email, password);
         // log in 
         signIn(email, password)
             .then(result => {
@@ -43,7 +43,7 @@ console.log(email,password);
                 // });
 
                 navigate(`${location?.state ? location.state : '/'}`);
-             
+
 
             })
             .catch(err => {
@@ -59,7 +59,7 @@ console.log(email,password);
         googleSignIn()
             .then(async result => {
                 console.log(result?.user);
-                const currentUser = {name: result?.user?.displayName,email:result?.user?.email,imageURL:result?.user?.photoURL};
+                const currentUser = { name: result?.user?.displayName, email: result?.user?.email, imageURL: result?.user?.photoURL };
                 console.log(currentUser);
                 // const { data } = await axiosPublic.post('/user-info',currentUser)
                 // console.log("responseee", data);
