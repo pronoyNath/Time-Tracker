@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaArrowRotateLeft, FaRegTrashCan } from 'react-icons/fa6';
 import BtnComponent from '../Test/BtnComponent';
 import DisplayComponent from '../Test/DisplayComponent';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { ImSpinner9 } from "react-icons/im";
+import { AuthContext } from '../../Provider/AuthProvider';
+import TaskCard from '../../Components/TaskCard/TaskCard';
+import { useQuery } from '@tanstack/react-query';
 
 const ProjectManagement = () => {
 
+    const { user, loading } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
+    // const [tasks, setTasks] = useState([]);
 
     // for stop watch 
     const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
@@ -74,7 +80,7 @@ const ProjectManagement = () => {
 
         axiosPublic.post('/task-collection', data)
             .then(({ data }) => {
-    
+
                 if (data?.insertedId) {
                     document.getElementById('my_modal_5').close();
                     // refetch();
@@ -98,11 +104,24 @@ const ProjectManagement = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                
+
             });
 
     }
 
+
+    // fetching data of taskCollection
+    // tanstack query for updated data get 
+    const { data: tasks = [], refetch } = useQuery({
+        queryKey: ['updaetdUserInfo'],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/task-collection");
+            return res.data;
+        }
+    })
+
+    // axiosPublic.get("/task-collection")
+    // .then(({ data }) => { setTasks(data) })
 
     return (
         <div className=' '>
@@ -140,10 +159,10 @@ const ProjectManagement = () => {
 
 
                                 <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-green-500 hover:scale-105 mb-5 transform transition-transform duration-300 hover:bg-green-400 ">
-                                    {/* {
-                                                loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> : */}
-                                    Create Project
-                                    {/* } */}
+                                    {
+                                        loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> :
+                                            " Create Project"
+                                    }
                                 </button>
 
 
@@ -171,13 +190,24 @@ const ProjectManagement = () => {
 
             </div>
 
-
-
-
-
-
-            {/* projecs lists  */}
             <div className="flex flex-col  p-6 space-y-4 sm:p-10  text-black mt-10" >
+                <h2 className="text-xl font-semibold">My Projects</h2>
+
+                {
+                    tasks.map(task => <TaskCard
+                        key={task.id}
+                        time={time}
+                        resume={resume}
+                        reset={reset}
+                        start={start}
+                        status={status}
+                        task={task}
+                    ></TaskCard>)
+                }
+
+            </div>
+            {/* projecs lists  */}
+            {/* <div className="flex flex-col  p-6 space-y-4 sm:p-10  text-black mt-10" >
                 <h2 className="text-xl font-semibold">My Projects</h2>
                 <ul className="flex flex-col divide-y divide-black">
                     <li className="flex flex-col py-2 sm:flex-row sm:justify-between border border-black p-2">
@@ -190,9 +220,7 @@ const ProjectManagement = () => {
                                         <p className="text-sm text-gray-900">Classic</p>
                                     </div>
                                     <div className="text-right flex gap-5 items-center" >
-                                        {/* <h3 className='text-xl font-bold text-black'>00H : 00M : 00S : 00MS</h3> */}
-                                        {/* <button className='hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-45  btn btn-lg text-white hover:bg-green-600 bg-green-900'> Start</button> */}
-                                        {/* <p className="text-sm line-through text-gray-600">75.50€</p> */}
+                    
                                         <DisplayComponent time={time} />
                                         <BtnComponent status={status} resume={resume} reset={reset} stop={stop} start={start} />
                                     </div>
@@ -215,7 +243,7 @@ const ProjectManagement = () => {
 
                 </ul>
 
-            </div>
+            </div> */}
 
         </div>
     );
