@@ -1,7 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { FaArrowRotateLeft, FaRegTrashCan } from 'react-icons/fa6';
-import BtnComponent from '../Test/BtnComponent';
-import DisplayComponent from '../Test/DisplayComponent';
+import React, { useContext, useEffect, useState } from 'react';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
@@ -14,61 +11,6 @@ const ProjectManagement = () => {
 
     const { user, loading } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
-    // const [tasks, setTasks] = useState([]);
-
-    // for stop watch 
-    const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
-    const [interv, setInterv] = useState();
-    const [status, setStatus] = useState(0);
-    // Not started = 0
-    // started = 1
-    // stopped = 2
-
-    const start = () => {
-        run();
-        setStatus(1);
-        setInterv(setInterval(run, 10));
-    };
-
-    var updatedMs = time.ms, updatedS = time.s, updatedM = time.m, updatedH = time.h;
-
-    const run = () => {
-        if (updatedM === 60) {
-            updatedH++;
-            updatedM = 0;
-        }
-        if (updatedS === 60) {
-            updatedM++;
-            updatedS = 0;
-        }
-        if (updatedMs === 100) {
-            updatedS++;
-            updatedMs = 0;
-        }
-        updatedMs++;
-        return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
-    };
-
-    const stop =async (id) => {
-        const findID = tasks.find(task=>task._id === id)
-        console.log(findID);
-        if(id === findID?._id){
-            clearInterval(interv);
-            setStatus(2);
-        }
-        
-    };
-
-    const reset = () => {
-        clearInterval(interv);
-        setStatus(0);
-        setTime({ ms: 0, s: 0, m: 0, h: 0 })
-    };
-
-    const resume = () => start();
-
-
-    //   finish stop watch 
 
 
     const handleCreateProject = (e) => {
@@ -116,7 +58,7 @@ const ProjectManagement = () => {
 
 
     // fetching data of taskCollection
-    // tanstack query for updated data get 
+    // tanstack query for fetching data
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ['updaetdUserInfo'],
         queryFn: async () => {
@@ -124,9 +66,6 @@ const ProjectManagement = () => {
             return res.data;
         }
     })
-
-    // axiosPublic.get("/task-collection")
-    // .then(({ data }) => { setTasks(data) })
 
     return (
         <div className=' '>
@@ -201,12 +140,6 @@ const ProjectManagement = () => {
                 {
                     tasks.map(task => <TaskCard
                         key={task._id}
-                        time={time}
-                        resume={resume}
-                        reset={reset}
-                        start={start}
-                        status={status}
-                        stop={() => stop(task._id)}
                         task={task}
                     ></TaskCard>)
                 }
@@ -221,4 +154,3 @@ export default ProjectManagement;
 
 
 
-// ekhon changeessss 

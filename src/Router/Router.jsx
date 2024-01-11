@@ -6,6 +6,7 @@ import Dashboard from '../Pages/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute';
 import ProjectManagement from '../Pages/ProjectManagement/ProjectManagement';
 import Test from '../Pages/Test/Test';
+import Check from '../Pages/Test/Check';
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/test",
-        element: <Test></Test>
+        element: <Check></Check>
     },
     {
         path: "/login",
