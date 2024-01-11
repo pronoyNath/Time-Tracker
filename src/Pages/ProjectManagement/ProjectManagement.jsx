@@ -12,7 +12,6 @@ const ProjectManagement = () => {
     const { user, loading } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
 
-
     const handleCreateProject = (e) => {
 
         e.preventDefault();
