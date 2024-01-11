@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     // const axiosPublic = useAxiosPublic();
     const { user } = useContext(AuthContext);
-    console.log(user?.displayName);
+    // console.log(user?.displayName);
     const [userInfo, setUserInfo] = useState([]);
 
     // useEffect(() => {

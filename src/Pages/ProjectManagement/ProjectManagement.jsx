@@ -2,66 +2,111 @@ import React, { useState } from 'react';
 import { FaArrowRotateLeft, FaRegTrashCan } from 'react-icons/fa6';
 import BtnComponent from '../Test/BtnComponent';
 import DisplayComponent from '../Test/DisplayComponent';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const ProjectManagement = () => {
 
+    const axiosPublic = useAxiosPublic();
+
     // for stop watch 
-    const [time, setTime] = useState({ms:0, s:0, m:0, h:0});
-  const [interv, setInterv] = useState();
-  const [status, setStatus] = useState(0);
-  // Not started = 0
-  // started = 1
-  // stopped = 2
+    const [time, setTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
+    const [interv, setInterv] = useState();
+    const [status, setStatus] = useState(0);
+    // Not started = 0
+    // started = 1
+    // stopped = 2
 
-  const start = () => {
-    run();
-    setStatus(1);
-    setInterv(setInterval(run, 10));
-  };
+    const start = () => {
+        run();
+        setStatus(1);
+        setInterv(setInterval(run, 10));
+    };
 
-  var updatedMs = time.ms, updatedS = time.s, updatedM = time.m, updatedH = time.h;
+    var updatedMs = time.ms, updatedS = time.s, updatedM = time.m, updatedH = time.h;
 
-  const run = () => {
-    if(updatedM === 60){
-      updatedH++;
-      updatedM = 0;
+    const run = () => {
+        if (updatedM === 60) {
+            updatedH++;
+            updatedM = 0;
+        }
+        if (updatedS === 60) {
+            updatedM++;
+            updatedS = 0;
+        }
+        if (updatedMs === 100) {
+            updatedS++;
+            updatedMs = 0;
+        }
+        updatedMs++;
+        return setTime({ ms: updatedMs, s: updatedS, m: updatedM, h: updatedH });
+    };
+
+    const stop = () => {
+        clearInterval(interv);
+        setStatus(2);
+    };
+
+    const reset = () => {
+        clearInterval(interv);
+        setStatus(0);
+        setTime({ ms: 0, s: 0, m: 0, h: 0 })
+    };
+
+    const resume = () => start();
+
+
+    //   finish stop watch 
+
+
+    const handleCreateProject = (e) => {
+
+        e.preventDefault();
+
+        const form = new FormData(e.currentTarget);
+        const projectName = form.get('projectName');
+        const taskTitle = form.get('taskTitle');
+        const description = form.get('description');
+        const timer = form.get('timer')
+        const data = { projectName, taskTitle, description, timer, }
+        console.log(data);
+
+        axiosPublic.post('/task-collection', data)
+            .then(({ data }) => {
+    
+                if (data?.insertedId) {
+                    document.getElementById('my_modal_5').close();
+                    // refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Project Created Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+            })
+            .catch((error) => {
+                // Show error toast if update fails
+                document.getElementById('my_modal_5').close();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Failed to Create Project",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                
+            });
+
     }
-    if(updatedS === 60){
-      updatedM++;
-      updatedS = 0;
-    }
-    if(updatedMs === 100){
-      updatedS++;
-      updatedMs = 0;
-    }
-    updatedMs++;
-    return setTime({ms:updatedMs, s:updatedS, m:updatedM, h:updatedH});
-  };
-
-  const stop = () => {
-    clearInterval(interv);
-    setStatus(2);
-  };
-
-  const reset = () => {
-    clearInterval(interv);
-    setStatus(0);
-    setTime({ms:0, s:0, m:0, h:0})
-  };
-
-  const resume = () => start();
-
-
-//   finish stop watch 
-
-
-
-
 
 
     return (
         <div className=' '>
-        
+
             {/* modal start */}
             <div className=" ">
 
@@ -74,136 +119,49 @@ const ProjectManagement = () => {
                         <h3 className="font-bold text-3xl text-center uppercase">Create project</h3>
                         <div className="modal-action">
 
-                            <form className="space-y-8 mt-10 w-full">
-                                {/* <div className="space-y-4" >
-                                            <div className='flex gap-5'>
-                                                <div className="space-y-2 flex-1" >
-                                                    <label className="block text-sm text-left">Your name</label>
-                                                    <input type="text" name="name" id="name" placeholder="your name" className="w-full px-3 py-3 border rounded-md border-red-500 bg-gray-800 text-gray-100 focus:border-violet-400" defaultValue={userInfo?.name} />
-                                                </div>
-                                                <div className="space-y-2 flex-1" >
+                            <form onSubmit={handleCreateProject} className="w-full mx-auto">
 
-                                                    <label className="block text-sm text-left">Upload Profile Image*</label>
-                                                    <input type="file" id="img" name="img" accept="image/*" className="file-input file-input-bordered w-full bg-gray-800 border-red-500" />
-                                                </div>
-                                            </div>
-                                            <div className='flex gap-5'>
-
-                                                <div className="space-y-2 flex-1" >
-                                                    <div className="flex justify-between" >
-                                                        <label className="text-sm">Blood Group*</label>
-                                                    </div>
-                                                    <select defaultValue={userInfo?.bloodGroup} name="bloodGroup" className="select select-error w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100" >
-
-                                                        <option>A+</option>
-                                                        <option>A-</option>
-                                                        <option>B+</option>
-                                                        <option>B-</option>
-                                                        <option>AB+</option>
-                                                        <option>AB-</option>
-                                                        <option>O+</option>
-                                                        <option>O-</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div className='flex gap-5'>
-
-                                                <div className="space-y-2 flex-1">
-                                                    <div className="flex justify-between">
-                                                        <label className="text-sm">District*</label>
-                                                    </div>
-                                                    <select
-                                                        defaultValue={userInfo?.district}
-                                                        name="district"
-                                                        value={selectedDistrict}
-                                                        onChange={(e) => {
-                                                            setSelectedDistrict(e.target.value);
-                                                        }}
-
-                                                        required
-                                                        className="select select-error w-full px-3 py-2 border rounded-md border-red-500 bg-gray-800 text-gray-100 "
-                                                    >
-                                                        <option disabled value="">Select Your District</option>
-
-                                                        {districts.map((district) => (
-                                                            <SelectOptions key={district?.id} district={district}></SelectOptions>
-                                                        ))}
-                                                    </select>
-                                                </div>
+                                <div className="mb-5">
+                                    <label className="block mb-2  text-sm font-medium ">Project Name</label>
+                                    <input type="text" name='projectName' id="small-input" className="block text-black w-full p-2  border  rounded-lg sm:text-xs  " />
+                                </div>
+                                <div className="mb-5">
+                                    <label className="block  mb-2 text-sm font-medium ">Task Title</label>
+                                    <input type="text" name='taskTitle' id="base-input" className="border text-black  text-sm rounded-lg  block w-full p-2.5   " />
+                                </div>
+                                <div className="mb-5">
+                                    <label className="block mb-2 text-sm font-medium  ">Description</label>
+                                    <input type="text" name='description' id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " />
+                                </div>
+                                <div className="mb-5">
+                                    <label className="block mb-2 text-sm font-medium  ">Timer</label>
+                                    <input type="text" defaultValue={"0000"} name='timer' id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " placeholder='00:00' />
+                                </div>
 
 
-                                                <div className="space-y-2 flex-1">
-                                                    <div className="flex justify-between">
-                                                        <label className="text-sm">Upazila*</label>
-                                                    </div>
-                                                    <select
-                                                        name="upazila"
-                                                        value={selectedUpazila}
-                                                        onChange={(e) => {
-                                                            setSelectedUpazila(e.target.value);
-                                                        }}
-                                                        required
-                                                        className="select select-error w-full px-3 py-2 border rounded-md bg-gray-800 text-gray-100 "
-                                                    >
-                                                        <option disabled value="">Select Your Upazila</option>
-                                                        {filteredUpazilas.map((upazila) => (
-                                                            <option key={upazila?.id} value={upazila.id}>
-                                                                {upazila.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div> */}
-
-
-
-
-
-                                <form className="max-w-sm mx-auto">
-
-                                    <div className="mb-5">
-                                        <label className="block mb-2  text-sm font-medium ">Project Name</label>
-                                        <input type="text" id="small-input" className="block text-black w-full p-2  border  rounded-lg sm:text-xs  " />
-                                    </div>
-                                    <div className="mb-5">
-                                        <label className="block  mb-2 text-sm font-medium ">Task Title</label>
-                                        <input type="text" id="base-input" className="border text-black  text-sm rounded-lg  block w-full p-2.5   " />
-                                    </div>
-                                    <div className="mb-5">
-                                        <label className="block mb-2 text-sm font-medium  ">Description</label>
-                                        <input type="text" id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " />
-                                    </div>
-                                    <div className="mb-5">
-                                        <label className="block mb-2 text-sm font-medium  ">Timer</label>
-                                        <input type="text" id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " placeholder='00:00' />
-                                    </div>
-
-                                </form>
-
-
-
-
-
-
-
-
-
-
-
-
-                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-green-500 hover:scale-105 transform transition-transform duration-300 hover:bg-green-400 ">
+                                <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-green-500 hover:scale-105 mb-5 transform transition-transform duration-300 hover:bg-green-400 ">
                                     {/* {
                                                 loading ? <ImSpinner9 className='mx-auto animate-spin text-xl'></ImSpinner9> : */}
-                                    'Confirm Update'
+                                    Create Project
                                     {/* } */}
                                 </button>
+
+
 
                                 <form method="dialog" className=''>
                                     {/* if there is a button in form, it will close the modal */}
                                     <button className="btn w-full hover:bg-slate-500 hover:border-none">Close</button>
                                 </form>
                             </form>
+
+
+
+
+
+
+
+
+                            {/* </form> */}
 
 
 
@@ -235,8 +193,8 @@ const ProjectManagement = () => {
                                         {/* <h3 className='text-xl font-bold text-black'>00H : 00M : 00S : 00MS</h3> */}
                                         {/* <button className='hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-45  btn btn-lg text-white hover:bg-green-600 bg-green-900'> Start</button> */}
                                         {/* <p className="text-sm line-through text-gray-600">75.50€</p> */}
-                                        <DisplayComponent time={time}/>
-                                        <BtnComponent status={status} resume={resume} reset={reset} stop={stop} start={start}/>
+                                        <DisplayComponent time={time} />
+                                        <BtnComponent status={status} resume={resume} reset={reset} stop={stop} start={start} />
                                     </div>
                                 </div>
                                 <div className="flex text-sm divide-x" >
