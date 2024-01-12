@@ -29,7 +29,7 @@ const ProjectManagement = () => {
 
                 if (data?.insertedId) {
                     document.getElementById('my_modal_5').close();
-                    // refetch();
+                    refetch();
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -43,6 +43,7 @@ const ProjectManagement = () => {
             .catch((error) => {
                 // Show error toast if update fails
                 document.getElementById('my_modal_5').close();
+                refetch();
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
@@ -140,6 +141,7 @@ const ProjectManagement = () => {
                     tasks.map(task => <TaskCard
                         key={task._id}
                         task={task}
+                        refetch={refetch}
                     ></TaskCard>)
                 }
 

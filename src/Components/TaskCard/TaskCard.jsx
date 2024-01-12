@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowRotateLeft, FaRegTrashCan } from 'react-icons/fa6';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task,refetch }) => {
     const { _id, projectName, taskTitle, description, timer } = task;
+    const axiosPublic = useAxiosPublic();
 
     const [running, setRunning] = useState(false);
-    const [seconds, setSeconds] = useState(0);
+    const [seconds, setSeconds] = useState(timer || 0);
 
     const handleStart = () => {
         setRunning(true);
@@ -17,7 +20,7 @@ const TaskCard = ({ task }) => {
 
     const handleReset = () => {
         setRunning(false);
-        setSeconds(0);
+        setSeconds(timer || 0);
     };
 
     useEffect(() => {
@@ -31,6 +34,35 @@ const TaskCard = ({ task }) => {
 
         return () => clearInterval(interval);
     }, [running]);
+
+    const handleUpdateTime = () => {
+        console.log(seconds);
+
+        axiosPublic
+            .put(`/update-time/${_id}`, { seconds })
+            .then(({ data }) => {
+                if (data?.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Profile Updated Successfully',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            })
+            .catch((error) => {
+                // Show error toast if update fails
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Failed to update Timer',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            });
+    };
 
     const formatTime = (time) => {
         const hours = Math.floor(time / 3600);
@@ -54,12 +86,14 @@ const TaskCard = ({ task }) => {
                                 <p className="text-sm text-gray-900">{description}</p>
                             </div>
                             <div className="text-right flex gap-5 items-center">
-                                <p>{formatTime(seconds)}</p>
+                                <p className='font-bold'>{formatTime(seconds)}</p>
 
-                                <button className="btn" onClick={running ? handleStop : handleStart}>
+                                <button className={`${running ? "btn hover:bg-red-400 bg-red-600 border-none text-white hover:scale-110" : "btn hover:bg-orange-400 bg-orange-600 border-none text-white hover:scale-110"}`} onClick={() => {
+                                    running ? (handleStop(), handleUpdateTime()) : handleStart();
+                                }}>
                                     {running ? 'Stop' : 'Start'}
                                 </button>
-                                <button className="btn" onClick={handleReset}>
+                                <button className="btn hover:bg-green-400 bg-green-600 border-none text-white hover:scale-110" onClick={handleReset}>
                                     Reset
                                 </button>
                             </div>
