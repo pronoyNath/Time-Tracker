@@ -12,7 +12,7 @@ const Banner = () => {
             </div>
 
             <Link to={"/dashboard"}>
-            <div className='text-3xl text-center my-10 p-5 font-bold w-full max-w-6xl bg-[#3fa92b] text-white mx-auto rounded flex items-center justify-center gap-3 hover:scale-105  hover:shadow-2xl hover:shadow-green-900  hover:ease-in-out cursor-alias duration-1000 hover:delay-150 hover:-skew-x-6  hover:origin-top-left hover:rotate-180 '>
+            <div className='text-2xl lg:text-3xl text-center my-10 p-5 font-bold w-full max-w-6xl bg-[#3fa92b] text-white mx-auto rounded flex items-center justify-center gap-3 hover:scale-105  hover:shadow-2xl hover:shadow-green-900  hover:ease-in-out cursor-alias duration-1000 hover:delay-150 hover:-skew-x-6  hover:origin-top-left hover:rotate-180 '>
                 <h3 className=''>Track Your Time</h3>
                 <Lottie animationData={rightArrow} className='w-[100px] h-50px'></Lottie>
             </div>

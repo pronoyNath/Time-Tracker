@@ -116,7 +116,7 @@ const Dashboard = () => {
                     ))}
                 </ul>
             </div>
-            <div className=" flex-1 p-7 z-0bg-gray-700 overflow-hidden">
+            <div className=" flex-1 p-7 z-0bg-gray-700 overflow-hidden max-w-5xl">
 
                 {
                     isDashboardActive &&

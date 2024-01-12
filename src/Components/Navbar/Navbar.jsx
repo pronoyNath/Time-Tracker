@@ -44,14 +44,14 @@ const Navbar = () => {
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="bg-[#33302e] dropdown-content mt-3 z-[1] px-2 py-5 rounded shadow-2xl border-2 border-[#dbb878] w-52">
+                        <ul tabIndex={0} className="bg-[#3fa92b] dropdown-content mt-3 z-[1] px-2 py-5 rounded shadow-2xl border-2 border-green-900 w-52">
                             {links}
                         </ul>
                     </div>
                     <Link to='/'>
                         <div className="flex justify-center items-center   hover:scale-125  hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-3">
                             <div className="inline-block"><Lottie animationData={clockAnimation} className="w-[100px] "></Lottie></div>
-                            <h3 className="text-2xl ml-5 inline-block">Time Tracker</h3>
+                            <h3 className="text-2xl ml-5  hidden md:block">Time Tracker</h3>
                         </div>
                     </Link>
                 </div>
@@ -64,9 +64,9 @@ const Navbar = () => {
 
 
                 <div className="navbar-end ">
-                    <div className="mr-1 text-xs  ">
+                    <div className="mr-1 text-xs hidden md:block">
                         <p className="">{user?.displayName}</p>
-                        <p className="hidden lg:block">{user?.email}</p>
+                        <p className="hidden md:block">{user?.email}</p>
                     </div>
                     <div>
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar mr-2">
