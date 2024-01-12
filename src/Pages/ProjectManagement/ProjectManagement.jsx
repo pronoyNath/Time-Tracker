@@ -60,12 +60,30 @@ const ProjectManagement = () => {
     // fetching data of taskCollection
     // tanstack query for fetching data
     const { data: tasks = [], refetch } = useQuery({
-        queryKey: ['updaetdUserInfo'],
+        queryKey: ['tasks'],
         queryFn: async () => {
             const res = await axiosPublic.get("/task-collection");
             return res.data;
         }
     })
+
+
+    const totalSec = tasks.reduce((sum, task) => sum + task.timer, 0);
+
+    // console.log('Total Seconds:', totalSec);
+    function formatTime(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+      
+        return `${String(hours).padStart(2, '0')} h ${String(minutes).padStart(2, '0')} min ${String(seconds).padStart(2, '0')} sec`;
+      }
+      
+      // Assuming totalSec is the result from the previous reduce operation
+      const formattedTime = formatTime(totalSec);
+      
+    //   console.log('Formatted Time:', formattedTime);
+    
 
     return (
         <div className=' '>
@@ -98,7 +116,7 @@ const ProjectManagement = () => {
                                 </div>
                                 <div className="mb-5">
                                     <label className="block mb-2 text-sm font-medium  ">Timer</label>
-                                    <input type="text" defaultValue={"0000"} name='timer' id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " placeholder='00:00' />
+                                    <input type="text" disabled defaultValue={"0000"} name='timer' id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " placeholder='00:00' />
                                 </div>
 
 
@@ -135,7 +153,10 @@ const ProjectManagement = () => {
             </div>
 
             <div className="flex flex-col  p-6 space-y-4 sm:p-10  text-black mt-10" >
+                <div className='flex justify-between items-center'>
                 <h2 className="text-xl font-semibold">My Projects</h2>
+                <h2 className="text-xl font-semibold mr-10"><span className='text-green-900 mr-5'>Total Time:</span> {formattedTime} </h2>
+                </div>
 
                 {
                     tasks.map(task => <TaskCard

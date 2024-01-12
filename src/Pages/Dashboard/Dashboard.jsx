@@ -7,9 +7,13 @@ import Lottie from "lottie-react";
 import timeAnimation from "../../assets/timerAnimation.json"
 import deadPool from "../../assets/deadPool.json"
 import killer from "../../assets/killer.json"
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const Dashboard = () => {
+    const axiosPublic = useAxiosPublic();
+
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
@@ -19,13 +23,32 @@ const Dashboard = () => {
     // const axiosPublic = useAxiosPublic();
     const { user } = useContext(AuthContext);
     // console.log(user?.displayName);
-    const [userInfo, setUserInfo] = useState([]);
 
-    // useEffect(() => {
-    //     axiosPublic.get(`/user/${user?.email}`)
-    //         .then(({ data }) => setUserInfo(data))
-    // }, [user?.email, axiosPublic])
+    // total time 
+    const { data: tasks = [], refetch } = useQuery({
+        queryKey: ['tasks'],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/task-collection");
+            return res.data;
+        }
+    })
+    console.log(tasks);
 
+    const totalSec = tasks.reduce((sum, task) => sum + task.timer, 0);
+
+    // console.log('Total Seconds:', totalSec);
+    function formatTime(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+      
+        return `${String(hours).padStart(2, '0')} h ${String(minutes).padStart(2, '0')} min ${String(seconds).padStart(2, '0')} sec`;
+      }
+      
+      // Assuming totalSec is the result from the previous reduce operation
+      const formattedTime = formatTime(totalSec);
+      
+      console.log('Formatted Time:', formattedTime);
 
 
 
@@ -109,9 +132,9 @@ const Dashboard = () => {
                                     <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4" >
                                     <Lottie animationData={timeAnimation} className="w-[100px] hover:scale-150  hover:ease-in-out duration-500 hover:delay-150  hover:origin-top-left hover:rotate-180 "></Lottie>
                                     </div>
-                                    <div className="flex flex-col justify-center align-middle hover:scale-150  hover:ease-in-out duration-500 hover:delay-150 hover:skew-x-6 hover:origin-top-left hover:rotate-6" >
-                                        <p className="text-6xl font-semibold leadi"><span className="animate-pulse">300</span>H</p>
-                                        <p className="capitalize">Total Working Hour</p>
+                                    <div className="flex flex-col justify-center align-middle hover:scale-105  hover:ease-in-out duration-500 hover:delay-150 hover:skew-x-1 hover:origin-top-left hover:rotate-1" >
+                                        <p className="text-6xl font-semibold leadi"><span className="animate-pulse">{formattedTime}</span></p>
+                                        <p className="capitalize text-center mt-1">Total Working Hour</p>
                                     </div>
                                     <div>
                                    
