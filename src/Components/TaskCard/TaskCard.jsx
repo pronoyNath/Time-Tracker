@@ -46,7 +46,7 @@ const TaskCard = ({ task,refetch }) => {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Profile Updated Successfully',
+                        title: 'Project Timer Updated',
                         showConfirmButton: false,
                         timer: 1500,
                     });
@@ -57,7 +57,7 @@ const TaskCard = ({ task,refetch }) => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Failed to update Timer',
+                    title: 'Failed To Update Timer',
                     showConfirmButton: false,
                     timer: 1500,
                 });

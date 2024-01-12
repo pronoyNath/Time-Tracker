@@ -12,6 +12,7 @@ const ProjectManagement = () => {
     const { user, loading } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
 
+    // create project 
     const handleCreateProject = (e) => {
 
         e.preventDefault();
@@ -21,10 +22,11 @@ const ProjectManagement = () => {
         const taskTitle = form.get('taskTitle');
         const description = form.get('description');
         const timer = form.get('timer')
-        const data = { projectName, taskTitle, description, timer, }
+        const userEmail = user?.email;
+        const data = { projectName, taskTitle, description, timer,userEmail }
         console.log(data);
 
-        axiosPublic.post('/task-collection', data)
+        axiosPublic.post(`/task-collection`, data)
             .then(({ data }) => {
 
                 if (data?.insertedId) {
@@ -62,7 +64,7 @@ const ProjectManagement = () => {
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ['tasks'],
         queryFn: async () => {
-            const res = await axiosPublic.get("/task-collection");
+            const res = await axiosPublic.get(`/task-collection/${user?.email}`);
             return res.data;
         }
     })
