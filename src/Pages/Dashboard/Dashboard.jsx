@@ -65,7 +65,7 @@ const Dashboard = () => {
 
 
     return (
-        <div className="flex ">
+        <div className="flex">
             <div
                 className={` ${open ? "w-72" : "w-20 "
                     } bg-green-900  p-5 z-50 pt-8 relative duration-300 h-auto`}
@@ -116,7 +116,7 @@ const Dashboard = () => {
                     ))}
                 </ul>
             </div>
-            <div className=" flex-1 p-7 z-0bg-gray-700 overflow-hidden max-w-5xl">
+            <div className=" flex-1 p-3 lg:p-7 z-0bg-gray-700 overflow-hidden max-w-6xl">
 
                 {
                     isDashboardActive &&
@@ -126,14 +126,14 @@ const Dashboard = () => {
                         </div>
                        
 
-                        <section className="p-6 my-6 bg-green-600 text-gray-100">
+                        <section className="lg:p-6 my-6 bg-green-600 text-gray-100">
                             <div className="container mx-auto " >
-                                <div className="flex p-4 justify-center space-x-4 rounded-lg md:space-x-6 bg-green-700 text-gray-100" >
+                                <div className="flex flex-col md:flex-row p-4 justify-center space-x-4 rounded-lg md:space-x-6 bg-green-700 text-gray-100" >
                                     <div className="flex justify-center p-2 align-middle rounded-lg sm:p-4" >
                                     <Lottie animationData={timeAnimation} className="w-[100px] hover:scale-150  hover:ease-in-out duration-500 hover:delay-150  hover:origin-top-left hover:rotate-180 "></Lottie>
                                     </div>
-                                    <div className="flex flex-col justify-center align-middle hover:scale-105  hover:ease-in-out duration-500 hover:delay-150 hover:skew-x-1 hover:origin-top-left hover:rotate-1" >
-                                        <p className="text-6xl font-semibold leadi"><span className="animate-pulse">{formattedTime}</span></p>
+                                    <div className="flex flex-col justify-center items-center align-middle hover:scale-105  hover:ease-in-out duration-500 hover:delay-150 hover:skew-x-1 hover:origin-top-left hover:rotate-1" >
+                                        <p className="text-xl lg:text-6xl font-semibold leadi"><span className="animate-pulse">{formattedTime}</span></p>
                                         <p className="capitalize text-center mt-1">Total Working Hour</p>
                                     </div>
                                     <div>

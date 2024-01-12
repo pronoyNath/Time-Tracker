@@ -88,14 +88,14 @@ const ProjectManagement = () => {
     // console.log(tasks);
 
     return (
-        <div className={`${tasks.length>2 ? "" : "h-screen"}`}>
+        <div className={`${tasks.length>2 ? "" : "h-[700px]"}`}>
 
             {/* modal start */}
             <div className=" ">
 
 
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <button className="text-4xl text-center w-full font-bold p-5 bg-green-900  uppercase text-gray-100
+                <button className="text-2xl lg:text-4xl text-center w-full font-bold p-5 bg-green-900  uppercase text-gray-100
               hover:scale-100  hover:ease-in-out hover:bg-green-600 duration-1000 hover:delay-150 hover:skew-y-1 hover:origin-center " onClick={() => document.getElementById('my_modal_5').showModal()}>Creat Project <span>+</span></button>
                 <dialog id="my_modal_5" className="modal text-gray-100 modal-bottom -z-10 sm:modal-middle">
                     <div className="modal-box bg-green-800">
@@ -156,8 +156,8 @@ const ProjectManagement = () => {
 
             <div className="flex flex-col  p-6 space-y-4 sm:p-10  text-black mt-10" >
                 <div className='flex justify-between items-center'>
-                <h2 className="text-xl font-semibold">My Projects</h2>
-                <h2 className="text-xl font-semibold mr-10"><span className='text-green-900 mr-5'>Total Time:</span> {formattedTime} </h2>
+                <h2 className="text-xs md:text-sm lg:text-xl font-semibold">My Projects</h2>
+                <h2 className="text-xs md:text-sm lg:text-xl font-semibold lg:mr-10"><span className='text-green-900 lg:mr-5'>Total Time:</span> {formattedTime} </h2>
                 </div>
 
                 {

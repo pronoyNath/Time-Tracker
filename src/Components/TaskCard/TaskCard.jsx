@@ -159,17 +159,17 @@ const TaskCard = ({ task, refetch }) => {
                 <div className="flex w-full space-x-2 sm:space-x-4">
                     <div className="flex flex-col justify-between w-full pb-4">
                         <div className="flex justify-between w-full pb-2 space-x-2">
-                            <div className="space-y-1">
-                                <h3 className="text-xl font-semibold leadi sm:pr-8 hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-45">
+                            <div className="space-y-1  w-full">
+                                <div className='flex justify-between items-center w-full'>
+                                <div>
+                                <h3 className="text-sm md:text-lg lg:text-xl font-semibold leadi sm:pr-8 hover:ease-in-out duration-1000 hover:delay-150 hover:-skew-y-6 hover:origin-top-left hover:rotate-45">
                                     {projectName}
                                 </h3>
-                                <h3 className="text-lg leadi sm:pr-8">{taskTitle}</h3>
-                                <p className="text-sm text-gray-900">{description}</p>
-                            </div>
-                            <div className="text-right flex gap-5 items-center">
-                                <p className='font-bold'>{formatTime(seconds)}</p>
+                                </div>
+                                <div className="text-right flex gap-2 md:gap-5 items-center">
+                                <p className='font-bold text-xs md:text-base'>{formatTime(seconds)}</p>
 
-                                <button className={`${running ? "btn hover:bg-red-400 bg-red-600 border-none text-white hover:scale-110" : "btn hover:bg-orange-400 bg-orange-600 border-none text-white hover:scale-110"}`} onClick={() => {
+                                <button className={`${running ? "btn btn-xs md:btn-md hover:bg-red-400 bg-red-600 border-none text-white hover:scale-110" : "btn btn-xs md:btn-md hover:bg-orange-400 bg-orange-600 border-none text-white hover:scale-110"}`} onClick={() => {
                                     running ? (handleStop(), handleUpdateTime()) : handleStart();
                                 }}>
                                     {running ? 'Stop' : 'Start'}
@@ -178,6 +178,22 @@ const TaskCard = ({ task, refetch }) => {
                                     Reset
                                 </button> */}
                             </div>
+                                </div>
+                                <h3 className="text-xs md:text-base lg:text-lg leadi sm:pr-8">{taskTitle}</h3>
+                                <p className="text-xs lg:text-sm text-gray-900">{description}</p>
+                            </div>
+                            {/* <div className="text-right flex gap-5 items-center">
+                                <p className='font-bold text-xs md:text-base'>{formatTime(seconds)}</p>
+
+                                <button className={`${running ? "btn btn-xs md:btn-md hover:bg-red-400 bg-red-600 border-none text-white hover:scale-110" : "btn btn-xs md:btn-md hover:bg-orange-400 bg-orange-600 border-none text-white hover:scale-110"}`} onClick={() => {
+                                    running ? (handleStop(), handleUpdateTime()) : handleStart();
+                                }}>
+                                    {running ? 'Stop' : 'Start'}
+                                </button> */}
+                                {/* <button className="btn hover:bg-green-400 bg-green-600 border-none text-white hover:scale-110" onClick={handleReset}>
+                                    Reset
+                                </button> */}
+                            {/* </div> */}
                         </div>
                         <div className="flex text-sm divide-x">
                             <div>
