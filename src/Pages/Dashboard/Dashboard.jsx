@@ -28,11 +28,11 @@ const Dashboard = () => {
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ['tasks'],
         queryFn: async () => {
-            const res = await axiosPublic.get("/task-collection");
+            const res = await axiosPublic.get(`/task-collection/${user?.email}`);
             return res.data;
         }
     })
-    console.log(tasks);
+    // console.log(tasks); 
 
     const totalSec = tasks.reduce((sum, task) => sum + task.timer, 0);
 

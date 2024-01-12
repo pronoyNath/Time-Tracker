@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import ProjectManagement from '../Pages/ProjectManagement/ProjectManagement';
 import Test from '../Pages/Test/Test';
 import Check from '../Pages/Test/Check';
+import UserProfile from '../Pages/Dashboard/userProfile/userProfile';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: 'project-management',
                 element: <ProjectManagement></ProjectManagement>
+            },
+            {
+                path: 'profile',
+                element: <UserProfile></UserProfile>
             }
         ]
     },

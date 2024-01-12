@@ -85,10 +85,10 @@ const ProjectManagement = () => {
       const formattedTime = formatTime(totalSec);
       
     //   console.log('Formatted Time:', formattedTime);
-    
+    console.log(tasks);
 
     return (
-        <div className=' '>
+        <div className={`${tasks.length>2 ? "" : "h-screen"}`}>
 
             {/* modal start */}
             <div className=" ">
