@@ -48,7 +48,7 @@ const Dashboard = () => {
       // Assuming totalSec is the result from the previous reduce operation
       const formattedTime = formatTime(totalSec);
       
-      console.log('Formatted Time:', formattedTime);
+    //   console.log('Formatted Time:', formattedTime);
 
 
 

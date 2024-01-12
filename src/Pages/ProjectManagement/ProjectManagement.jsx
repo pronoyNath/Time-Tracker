@@ -85,7 +85,7 @@ const ProjectManagement = () => {
       const formattedTime = formatTime(totalSec);
       
     //   console.log('Formatted Time:', formattedTime);
-    console.log(tasks);
+    // console.log(tasks);
 
     return (
         <div className={`${tasks.length>2 ? "" : "h-screen"}`}>
@@ -118,7 +118,7 @@ const ProjectManagement = () => {
                                 </div>
                                 <div className="mb-5">
                                     <label className="block mb-2 text-sm font-medium  ">Timer</label>
-                                    <input type="text" disabled defaultValue={"0000"} name='timer' id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " placeholder='00:00' />
+                                    <input type="text" disabled defaultValue={0} name='timer' id="large-input" className="block   text-black w-full p-4  border  rounded-lg sm:text-md    " placeholder='00:00' />
                                 </div>
 
 
